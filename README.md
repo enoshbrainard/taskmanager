@@ -65,14 +65,22 @@ A fullstack web application for managing employees and tasks, built with Next.js
 - `POST /api/auth/login` - Login
 - `GET /api/auth/me` - Get current user info
 
+  <img width="1122" height="729" alt="image" src="https://github.com/user-attachments/assets/6a498dad-0cb2-4822-bf21-4c250358bf80" />
+
+
 ### Tasks
 - `GET /api/tasks` - Get all tasks (Admin) or assigned tasks (Employee)
 - `POST /api/tasks` - Create a task (Admin only)
 - `PUT /api/tasks/:id` - Update a task
 - `DELETE /api/tasks/:id` - Delete a task (Admin only)
 
+  <img width="1919" height="934" alt="image" src="https://github.com/user-attachments/assets/56e2d723-1241-43bb-bb13-0b4bbb687ddf" />
+
+
 ### Employees
 - `GET /api/employees` - Get all employees (Admin only)
 
 ### Dashboard
 - `GET /api/dashboard` - Get dashboard statistics
+
+  
