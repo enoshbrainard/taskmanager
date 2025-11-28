@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from './Card';
-import { Calendar, User as UserIcon } from 'lucide-react';
+import { Calendar, User as UserIcon, Trash2 } from 'lucide-react';
 
 interface Task {
     _id: string;
@@ -18,10 +18,11 @@ interface Task {
 interface TaskCardProps {
     task: Task;
     onStatusChange?: (id: string, status: string) => void;
+    onDelete?: (id: string) => void;
     isAdmin?: boolean;
 }
 
-export const TaskCard: React.FC<TaskCardProps> = ({ task, onStatusChange, isAdmin }) => {
+export const TaskCard: React.FC<TaskCardProps> = ({ task, onStatusChange, onDelete, isAdmin }) => {
     const priorityColors = {
         low: 'bg-green-100 text-green-700',
         medium: 'bg-yellow-100 text-yellow-700',
@@ -37,12 +38,23 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onStatusChange, isAdmi
     return (
         <Card className="hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start mb-3">
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${priorityColors[task.priority]}`}>
-                    {task.priority}
-                </span>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[task.status]}`}>
-                    {task.status.replace('-', ' ')}
-                </span>
+                <div className="flex gap-2">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${priorityColors[task.priority]}`}>
+                        {task.priority}
+                    </span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[task.status]}`}>
+                        {task.status.replace('-', ' ')}
+                    </span>
+                </div>
+                {isAdmin && onDelete && (
+                    <button
+                        onClick={() => onDelete(task._id)}
+                        className="text-gray-400 hover:text-red-500 transition-colors"
+                        title="Delete Task"
+                    >
+                        <Trash2 size={18} />
+                    </button>
+                )}
             </div>
 
             <h3 className="font-bold text-gray-900 mb-2">{task.title}</h3>
