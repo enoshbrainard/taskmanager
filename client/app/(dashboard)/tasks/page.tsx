@@ -74,6 +74,17 @@ export default function TasksPage() {
         }
     };
 
+    const handleDeleteTask = async (id: string) => {
+        if (confirm('Are you sure you want to delete this task?')) {
+            try {
+                await api.delete(`/tasks/${id}`);
+                fetchTasks();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    };
+
     const filteredTasks = tasks.filter(task => {
         if (filter === 'all') return true;
         return task.status === filter;
@@ -116,6 +127,7 @@ export default function TasksPage() {
                                 key={task._id}
                                 task={task}
                                 onStatusChange={handleStatusChange}
+                                onDelete={handleDeleteTask}
                                 isAdmin={user?.role === 'admin'}
                             />
                         ))}
@@ -195,3 +207,4 @@ export default function TasksPage() {
         </div >
     );
 }
+
